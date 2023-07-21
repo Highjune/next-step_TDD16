@@ -1,7 +1,5 @@
 # next-step_TDD16
 
-[수료증](https://github.com/Highjune/TIL/files/12069428/Title.title.TDD.with.Java.16.-.pdf)
-
 ![image](https://github.com/Highjune/TIL/assets/57219160/3374b131-f29b-42a1-b986-ed9a7a5ae411)
 
 # 자동차 경주 - 단위테스트

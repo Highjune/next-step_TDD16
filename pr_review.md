@@ -37,7 +37,7 @@
 
 
 
-# 로또 - TDD
+# 2. 로또 - TDD
 ## PR
 - 매개변수 최대 2개까지로 줄여보기
 - xxxUtil같은 클래스 설계는 지양하라. 이름 자체가 말하듯 범용성을 내포하고 있기에 여러 책임이 같이 맞물리게되고, 특정 구현체들의 요구조건에 맞추다보면 코드가 난잡해지기 쉬운 객체가 된다. 해당 기능같은경우 최대한 JDK 기본라이브러리가 제공하는걸 사용하거나 자체적으로 구현 혹은 공통되는부분이 꽤 있다면 차라리 인터페이스와 구현체 혹은 열거타입을 활용할 수 있다. 그외에 커스텀 Util 클래스를 만들지 않는게 좋습니다 ㅎ
@@ -231,3 +231,53 @@ private int toInt(String stringTobeInt) {
              .orElse(MISS);
     ``` 
     - 즉, 인자로 받은 데이터들을 각각의 인스턴스(FIRST, SECOND, THRID)가 직접 평가하도록하고 응답에 따라 로직을 수행하는 것. 이처럼 구현하면 상위 객체에서는 어떤 조건에 어떤 구현체인지 알 필요 없고, 각각의 구현체들 역시 각각 자기에게 맞는 조건식을 작성해서 검사할 수 있게 된다.
+    - 만약 Enum 객체를 찾아야 하는 조건들이 있다면? enum 필드에 조건을 추가해서 아래와 같이 작성하면 된다.
+    ```java
+    public enum Rank {
+
+    FIRST((count, isBonus) -> count == 6, 6, 2_000_000_000),
+    SECOND((count, isBonus) -> count == 5 && isBonus, 5, 30_000_000),
+    THIRD((count, isBonus) -> count == 5 && !isBonus, 5, 1_500_000),
+    FOURTH((count, isBonus) -> count == 4, 4, 50_000),
+    FIFTH((count, isBonus) -> count == 3, 3, 5_000),
+    MISS((count, isBonus) -> false, 0, 0);
+
+    private final BiPredicate<Integer, Boolean> matcher;
+    private final int matchingCount;
+    private final int prize;
+
+    Rank(BiPredicate<Integer, Boolean> matcher, int matchingCount, int prize) {
+        this.matcher = matcher;
+        this.matchingCount = matchingCount;
+        this.prize = prize;
+    }
+
+    public static Rank find(MatchCount matchCount, boolean isBonus) {
+        return Arrays.stream(values())
+                .filter(rank -> rank.matcher.test(matchCount.value(), isBonus))
+                .findFirst()
+                .orElse(MISS);
+    }
+
+    .. 중략 ..
+    ```
+
+# 3. 사다리타기 - FP, OOP
+
+- 방어적 복사
+    ```java
+    public List<Boolean> getLines() {
+        return Collections.unmodifiableList(lines);
+    }
+    ```
+
+- 리팩토링 대상?
+    - 반복되는 구문이 3번 이상이라면 리팩토링 대상
+
+- 공식문서
+    - [Mokito](https://github.com/mockito/mockito/wiki)
+    - [Junit5](https://junit.org/junit5/docs/current/user-guide/)
+
+
+# 4. 수강신청 - 레거시 코드 리팩토링
+- 딱히 없음.

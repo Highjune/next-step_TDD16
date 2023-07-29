@@ -13,12 +13,12 @@ https://github.com/next-step/java-racingcar/tree/highjune
 
 # 로또 - TDD
 https://github.com/next-step/java-lotto/tree/highjune
+[4단계 리뷰도 추가한 것](https://github.com/Highjune/java-lotto/tree/main)
 - PR 리뷰
     - [1단계 - 문자열 계산기](https://github.com/next-step/java-lotto/pull/3040)
     - [2단계 - 로또(자동)](https://github.com/next-step/java-lotto/pull/3115)
     - [3단계 - 로또(2등)](https://github.com/next-step/java-lotto/pull/3173)
     - [4단계 - 로또(수동)](https://github.com/next-step/java-lotto/pull/3229)
-    - [최종 - 4단계 리뷰도 추가한 것](https://github.com/Highjune/java-lotto/tree/main)
 
 # 사다리타기 - FP, OOP
 https://github.com/next-step/java-ladder/tree/highjune
